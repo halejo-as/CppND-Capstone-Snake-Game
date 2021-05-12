@@ -17,7 +17,8 @@ class Game {
 
  private:
   Snake snake;
-  SDL_Point food;
+  std::vector<SDL_Point> food;
+  int foodMax{2};
 
   std::random_device dev;
   std::mt19937 engine;

@@ -1,0 +1,3 @@
+/home/alejo/projects/udacity/c++/proj5_snake_game/build/CMakeFiles/rebuild_cache.dir
+/home/alejo/projects/udacity/c++/proj5_snake_game/build/CMakeFiles/edit_cache.dir
+/home/alejo/projects/udacity/c++/proj5_snake_game/build/CMakeFiles/SnakeGame.dir

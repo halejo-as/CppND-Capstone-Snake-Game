@@ -51,17 +51,21 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 }
 
 void Game::PlaceFood() {
-  int x, y;
-  while (true) {
-    x = random_w(engine);
-    y = random_h(engine);
-    // Check that the location is not occupied by a snake item before placing
-    // food.
-    if (!snake.SnakeCell(x, y)) {
-      food.x = x;
-      food.y = y;
-      return;
+  for(int nFood = food.size(); nFood<foodMax; nFood++){
+    int x, y;
+    SDL_Point f;
+    while (true) {
+      x = random_w(engine);
+      y = random_h(engine);
+      // Check that the location is not occupied by a snake item before placing
+      // food.
+      if (!snake.SnakeCell(x, y)) {
+        f.x = x;
+        f.y = y;
+        break;
+      }
     }
+    food.push_back(f);
   }
 }
 
@@ -74,13 +78,17 @@ void Game::Update() {
   int new_y = static_cast<int>(snake.head_y);
 
   // Check if there's food over here
-  if (food.x == new_x && food.y == new_y) {
-    score++;
-    PlaceFood();
-    // Grow snake and increase speed.
-    snake.GrowBody();
-    snake.speed += 0.02;
+  for(auto f = food.begin(); f != food.end(); ++f){
+    if (f->x == new_x && f->y == new_y) {
+      food.erase(f);
+      score++;
+      // Grow snake and increase speed.
+      snake.GrowBody();
+      snake.speed += 0.02;
+      break;
+    }
   }
+  PlaceFood();
 }
 
 int Game::GetScore() const { return score; }
