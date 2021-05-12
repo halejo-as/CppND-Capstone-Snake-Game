@@ -10,13 +10,14 @@
 class Game {
  public:
   Game(std::size_t grid_width, std::size_t grid_height);
-  void Run(Controller const &controller, Renderer &renderer,
+  void Run(Controller const &controller, Controller const &controller2, Renderer &renderer,
            std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
 
  private:
   Snake snake;
+  Snake snake2;
   std::vector<SDL_Point> food;
   int foodMax{2};
 
