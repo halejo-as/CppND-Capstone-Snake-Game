@@ -2,22 +2,26 @@
 #define GAME_H
 
 #include <random>
+#include <memory>
+#include <vector>
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#include "player.h"
 
 class Game {
  public:
+  //Game(std::size_t grid_width, std::size_t grid_height);
   Game(std::size_t grid_width, std::size_t grid_height);
-  void Run(Controller const &controller, Controller const &controller2, Renderer &renderer,
+  void push_back(std::shared_ptr<Player> p);
+  void Run(Renderer &renderer,
            std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
 
  private:
-  Snake snake;
-  Snake snake2;
+  std::vector<std::shared_ptr<Player>> players {};
   std::vector<SDL_Point> food;
   int foodMax{2};
 
@@ -26,7 +30,6 @@ class Game {
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
 
-  int score{0};
 
   void PlaceFood();
   void Update();
