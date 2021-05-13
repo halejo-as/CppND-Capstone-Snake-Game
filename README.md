@@ -1,5 +1,5 @@
 # NEW FEATURES FOR SNAKE
-## For the capstone prodect c++ udacity
+## For the capstone project c++ udacity
 
 * Selection the number of players (1 or 2)
 * Change the quantity of food into the board with the variable foodMax
@@ -18,6 +18,8 @@ The number of food is default 3, you should be watch 3 squared
 yellow each time into the board
 
 At the end is showed the score and the winner of the game
+
+## RUBRIC
 
 ### LOOPS, FUNCTIONS, I/O
 
@@ -44,7 +46,9 @@ At the end is showed the score and the winner of the game
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
-  * Linux: make is installed by default on most Linux distros
+  * Linux: make is installed by default on most Linux distrosor(i=0;i<3;i++)
+  {
+    r
   * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
   * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
 * SDL2 >= 2.0
