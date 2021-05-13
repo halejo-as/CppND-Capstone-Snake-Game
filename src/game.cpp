@@ -109,7 +109,7 @@ void Game::Update() {
       if (f->x == new_x && f->y == new_y) {
         food.erase(f);
         p->SetScore();
-        std::cout<<p->GetScore()<<" score \n";
+        std::cout<<p->GetName()<< " has"<<" score " << p->GetScore()<<"\n";
         // grow snake and increase speed.
         p->snake.GrowBody();
         p->snake.speed += 0.02;

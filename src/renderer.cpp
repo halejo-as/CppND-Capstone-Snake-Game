@@ -57,7 +57,7 @@ void Renderer::Render(std::vector<std::shared_ptr<Player>> players, std::vector<
   // Render players
   for(auto p : players){
     // Render snake's body
-    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(sdl_renderer, p->color[0],p->color[1],p->color[2],p->color[3]);
     for (SDL_Point const &point : p->snake.body) {
       block.x = point.x * block.w;
       block.y = point.y * block.h;
@@ -68,7 +68,7 @@ void Renderer::Render(std::vector<std::shared_ptr<Player>> players, std::vector<
     block.x = static_cast<int>(p->snake.head_x) * block.w;
     block.y = static_cast<int>(p->snake.head_y) * block.h;
     if (p->snake.alive) {
-      SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
+      SDL_SetRenderDrawColor(sdl_renderer, 0 ,p->color[1],p->color[2],p->color[3]);
     } else {
       SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
     }

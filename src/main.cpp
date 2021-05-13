@@ -13,15 +13,44 @@ int main() {
   constexpr std::size_t kGridWidth{32};
   constexpr std::size_t kGridHeight{32};
 
+
+
+  int nPlayer;
+  std::cout << "Welcome to SNAKE 2.0!\n";
+  std::cout << "Enter number of players (1 or 2)\n";
+  std::cin >> nPlayer;
+
+  while(nPlayer< 1 || nPlayer > 2){
+    std::cout << "Enter number of players (1 or 2)\n";
+    std::cin >> nPlayer;
+  }
+
+  std::vector<std::shared_ptr<Player>> players;
+  for(int i = 1; i<=nPlayer;i++){
+    std::string name;
+    std::cout << "Enter name for the player"<< i <<"\n";
+    std::cin>>name;
+    players.emplace_back(new Player(name,Controller(i),kGridWidth,kGridHeight));
+  }
+
+
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  std::shared_ptr<Player> p1(new Player(Controller(2),kGridWidth,kGridHeight));
-  std::shared_ptr<Player> p2(new Player(Controller(2),kGridWidth,kGridHeight));
   Game game(kGridWidth, kGridHeight);
-  game.push_back(p1);
-  game.push_back(p2);
+  for (auto p :players)
+    game.push_back(p);
+
   game.Run(renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
-  std::cout << "Score: " << p1->GetScore() << "\n";
-  std::cout << "Size: " << p1->GetSize() << "\n";
+  int winner = 0;
+  std::string winnerName;
+  for(auto p: players){
+    std::cout << p->GetName() << " score: " << p->GetScore()<<"\n";
+    if(winner < p->GetScore())
+      winnerName = p->GetName();
+  }
+  if (nPlayer==2){
+    std::cout <<"THE WINNER IS " << winnerName<< "\n";
+  }
+
   return 0;
 }

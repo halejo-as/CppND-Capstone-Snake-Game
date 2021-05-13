@@ -1,12 +1,44 @@
-# CPPND: Capstone Snake Game Example
+# NEW FEATURES FOR SNAKE
+## For the capstone prodect c++ udacity
 
-This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+* Selection the number of players (1 or 2)
+* Change the quantity of food into the board with the variable foodMax
+* Add names to the players
+* Display the winner of the game at the end
 
-<img src="snake_game.gif"/>
+## Behavior Program
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+At the start you should write the number of players 1 or 2 
+After enter the name for each player
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+The player 1 play with (arrow) 
+The player 2 play with (w, a ,s d) keys
+
+The number of food is default 3, you should be watch 3 squared
+yellow each time into the board
+
+At the end is showed the score and the winner of the game
+
+### LOOPS, FUNCTIONS, I/O
+
+* Accept the entry of the number of players
+* The name of each player could be enter at the begging
+
+### OOP
+
+* Created class Player to encapsuled the snake and the controller
+  and other attributes like name and score
+
+### MEMOMRY MANAGEMENT
+
+* Used of shared ptr to be able to recuperate information after
+  the display is closed
+
+### CONCURRENCY
+
+* Used async to execute the handle of each controller
+
+
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
