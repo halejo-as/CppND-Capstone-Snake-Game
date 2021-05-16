@@ -1,8 +1,7 @@
 #include "player.h"
 
-Player::Player(std::string n, Controller c, std::size_t width, std::size_t height)
+Player::Player(std::string n,  std::size_t width, std::size_t height)
   : name(n),
-    controller(c),
   snake(width,height){
     for(int i=0;i<3;i++){
       color[i] = std::rand()%256;

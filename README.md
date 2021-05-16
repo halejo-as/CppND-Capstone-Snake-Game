@@ -28,17 +28,20 @@ At the end is showed the score and the winner of the game
 
 ### OOP
 
-* Created class Player to encapsuled the snake and the controller
-  and other attributes like name and score
+* Created class Player to encapsuled the snake and other attributes like name and score
+* The controller Class encapsuled the players, so there is only one controller 
+  with 1 or 2 players
 
 ### MEMOMRY MANAGEMENT
 
 * Used of shared ptr to be able to recuperate information after
   the display is closed
+* Controller object in the main function is passed as a shared ptr
+  to control both players
 
 ### CONCURRENCY
 
-* Used async to execute the handle of each controller
+* Used async to execute the handle for the controller
 
 
 

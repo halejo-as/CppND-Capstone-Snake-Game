@@ -5,14 +5,12 @@
 #include <future>
 #include <chrono>
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : engine(dev()),
+Game::Game(std::size_t grid_width, std::size_t grid_height, std::shared_ptr<Controller> c)
+    : controller(c),
+      engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
   PlaceFood();
-}
-void Game::push_back(std::shared_ptr<Player> p){
-  players.push_back(p);
 }
 /*Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
@@ -37,15 +35,10 @@ void Game::Run(Renderer &renderer,
 
     // Input, Update, Render - the main game loop.
 
-    std::vector<std::future<void>> ftrs;
-
-    for(auto p : players){
-      ftrs.emplace_back(std::async(&Controller::HandleInput, &p->controller, std::ref(running),std::ref(p->snake)));
-    }
-    for(const std::future<void> &f: ftrs)
-      f.wait();
+    std::future<void> ftr = std::async(&Controller::HandleInput, *controller, std::ref(running));
+    //controller->HandleInput(running);
     Update();
-    renderer.Render(players, food);
+    renderer.Render(controller->players, food);
 
     frame_end = SDL_GetTicks();
 
@@ -70,6 +63,7 @@ void Game::Run(Renderer &renderer,
   }
 }
 
+
 void Game::PlaceFood() {
   for(int nFood = food.size(); nFood<foodMax; nFood++){
     int x, y;
@@ -82,7 +76,7 @@ void Game::PlaceFood() {
       // Check that the location is not occupied by a snake item before placing
       // food.
 
-      for(auto p : players){
+      for(auto p : controller->players){
         if (p->snake.SnakeCell(x, y)) {
           place = false;
         }
@@ -95,12 +89,12 @@ void Game::PlaceFood() {
 }
 
 void Game::Update() {
-  for(auto p : players){
+  for(auto p : controller->players){
     if (!p->snake.alive) return;
     p->snake.Update();
   }
 
-  for(auto p: players){
+  for(auto p: controller->players){
     int new_x = static_cast<int>(p->snake.head_x);
     int new_y = static_cast<int>(p->snake.head_y);
 

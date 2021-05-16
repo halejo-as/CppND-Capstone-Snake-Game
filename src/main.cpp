@@ -30,15 +30,15 @@ int main() {
     std::string name;
     std::cout << "Enter name for the player"<< i <<"\n";
     std::cin>>name;
-    players.emplace_back(new Player(name,Controller(i),kGridWidth,kGridHeight));
+    players.emplace_back(new Player(name,kGridWidth,kGridHeight));
   }
+  std::shared_ptr<Controller> controller(new Controller(nPlayer));
 
 
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Game game(kGridWidth, kGridHeight);
   for (auto p :players)
-    game.push_back(p);
-
+    controller->push_back(p);
+  Game game(kGridWidth, kGridHeight, std::move(controller));
   game.Run(renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
   int winner = 0;
